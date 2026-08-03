@@ -44,10 +44,23 @@ char *strmbtok(char *input, char *delimit, char *openblock, char *closeblock) {
 }
 
 int main(int argc, char *argv[]) {
-  FILE *fptr = fopen(argv[1], "r");
-  if (!fptr)
+  if (argc < 3) {
+    fprintf(stderr, "Usage: %s <input.csv> <output.html>\n", argv[0]);
     return 1;
-  freopen(argv[2], "w+", stdout);
+  }
+
+  FILE *fptr = fopen(argv[1], "r");
+  if (!fptr) {
+    perror("Error opening input file");
+    return 1;
+  }
+
+  if (freopen(argv[2], "w+", stdout) == NULL) {
+    perror("Error opening output file");
+    fclose(fptr);
+    return 1;
+  }
+
   char buf[1024];
 
   char *tokPtr;
