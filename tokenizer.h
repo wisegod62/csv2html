@@ -5,4 +5,6 @@
 // blocks
 char *strmbtok(char *input, char *delimit, char *openblock, char *closeblock);
 
+char *trim_quotes(char *str);
+
 #endif

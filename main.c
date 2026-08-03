@@ -33,8 +33,9 @@ int main(int argc, char *argv[]) {
 
     printf("<tr>");
     while (tokPtr != NULL) {
-      printf("<t%s>%s</t%s>", isFirstIter ? "h" : "d", tokPtr,
-             isFirstIter ? "h" : "d");
+      char tag = isFirstIter ? 'h' : 'd';
+      char *clean_text = trim_quotes(tokPtr);
+      printf("<t%c>%s</t%c>", tag, clean_text, tag);
       tokPtr = strmbtok(NULL, ",", "\"", "\"");
     }
     printf("</tr>");
