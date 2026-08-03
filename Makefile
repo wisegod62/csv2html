@@ -1,19 +1,10 @@
-# Compiler and flags
 CC = gcc
-CFLAGS = -Wall -g
+CFLAGS = -Wall -Wextra -std=c17
+TARGET = csv2html
 
-# Target executable name
-TARGET = main
+all: main.c tokenizer.c
+	$(CC) $(CFLAGS) main.c tokenizer.c -o $(TARGET)
 
-# Build rule
-all: $(TARGET)
-
-$(TARGET): main.o
-	$(CC) $(CFLAGS) -o $(TARGET) main.o
-
-main.o: main.c
-	$(CC) $(CFLAGS) -c main.c
-
-# Clean rule to remove compiled files
 clean:
-	rm -f $(TARGET) *.o
+	rm -f $(TARGET)
+
