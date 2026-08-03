@@ -52,6 +52,7 @@ int main(int argc, char *argv[]) {
 
   char *tokPtr;
 
+  int isFirstIter = 1;
   printf("<table>");
   while (fgets(buf, sizeof(buf), fptr) != NULL) {
     buf[strcspn(buf, "\r\n")] = '\0';
@@ -60,10 +61,15 @@ int main(int argc, char *argv[]) {
 
     printf("<tr>");
     while (tokPtr != NULL) {
-      printf("<td>%s</td>", tokPtr);
+      printf("<t%s>%s</t%s>", isFirstIter ? "h" : "d", tokPtr,
+             isFirstIter ? "h" : "d");
       tokPtr = strmbtok(NULL, ",", "\"", "\"");
     }
     printf("</tr>");
+
+    if (isFirstIter) {
+      isFirstIter = 0;
+    }
   }
   printf("</table>");
   return 0;
