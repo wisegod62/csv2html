@@ -25,25 +25,28 @@ int main(int argc, char *argv[]) {
   char *tokPtr;
 
   int isFirstIter = 1;
-  printf("<table>");
+  printf("<table>\n");
   while (fgets(buf, sizeof(buf), fptr) != NULL) {
     buf[strcspn(buf, "\r\n")] = '\0';
 
     tokPtr = strmbtok(buf, ",", "\"", "\"");
 
-    printf("<tr>");
+    printf("  <tr>");
     while (tokPtr != NULL) {
       char tag = isFirstIter ? 'h' : 'd';
       char *clean_text = trim_quotes(tokPtr);
+
       printf("<t%c>%s</t%c>", tag, clean_text, tag);
       tokPtr = strmbtok(NULL, ",", "\"", "\"");
     }
-    printf("</tr>");
+    printf("</tr>\n");
 
     if (isFirstIter) {
       isFirstIter = 0;
     }
   }
-  printf("</table>");
+  printf("</table>\n");
+
+  fclose(fptr);
   return 0;
 }

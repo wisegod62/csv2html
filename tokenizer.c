@@ -10,8 +10,21 @@ char *trim_quotes(char *str) {
 
   if (len >= 2 && str[0] == '"' && str[len - 1] == '"') {
     str[len - 1] = '\0';
-    return str + 1;
+    str = str + 1;
   }
+
+  size_t i = 0;
+  size_t j = 0;
+
+  while (str[i] != '\0') {
+    if (str[i] == '"' && str[i + 1] == '"') {
+      str[j++] = '"';
+      i += 2;
+    } else {
+      str[j++] = str[i++];
+    }
+  }
+  str[j] = '\0';
 
   return str;
 }
