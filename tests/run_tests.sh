@@ -29,5 +29,5 @@ else
 fi
 
 echo "🎉 All system checks completed successfully!"
-rm output.html
-make clean
+rm tests/output.html > /dev/null 2>&1
+make clean > /dev/null 2>&1
